@@ -1,0 +1,37 @@
+# Marketing lens — weak reach, tracking, capture, and content.
+signals:
+  - signal_id: missing_social_links
+    impact: limited_social_proof
+    lenses: [marketing]
+    title: Few or no social media links detected
+    severity: medium
+    requires: { has_social_links: false }
+    patterns: ["facebook.com", "instagram.com", "linkedin.com", "tiktok.com"]
+    requirements: [social_presence, brand_visibility]
+
+  - signal_id: no_marketing_pixel
+    impact: limited_paid_campaign_attribution
+    lenses: [marketing]
+    title: No marketing/retargeting pixel detected
+    severity: medium
+    requires: { meta_pixel: false, tiktok_pixel: false, linkedin_pixel: false }
+    patterns: ["fbq(", "analytics.tiktok.com", "snap.licdn.com"]
+    requirements: [campaign_attribution, retargeting]
+
+  - signal_id: weak_seo_metadata
+    impact: reduced_organic_discoverability
+    lenses: [marketing]
+    title: Weak or incomplete SEO metadata
+    severity: low
+    requires: { meta_description_present: false }
+    patterns: ["<meta name=description"]
+    requirements: [seo_optimisation, organic_discoverability]
+
+  - signal_id: no_newsletter_capture
+    impact: limited_long_term_lead_nurture
+    lenses: [marketing]
+    title: No newsletter / lead-magnet capture detected
+    severity: low
+    requires: { has_newsletter: false }
+    patterns: [newsletter, subscribe, "email alerts"]
+    requirements: [lead_capture, lead_nurture]

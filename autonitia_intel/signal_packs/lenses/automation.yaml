@@ -1,0 +1,57 @@
+# Automation lens — manual processes, weak lead response, repetitive admin.
+signals:
+  - signal_id: no_online_booking
+    impact: possible_manual_booking_coordination
+    lenses: [automation]
+    title: No online booking detected
+    severity: medium
+    requires: { has_online_booking: false }
+    patterns:
+      - calendly
+      - fresha
+      - acuity
+      - "book now"
+      - "book online"
+      - "book a viewing"
+      - "arrange a viewing"
+      - "schedule appointment"
+      - "request consultation"
+      - "reserve table"
+      - "book a table"
+    requirements: [online_scheduling, appointment_followup]
+
+  - signal_id: phone_only_cta
+    impact: limited_digital_lead_capture
+    lenses: [automation]
+    title: Phone appears to be the primary conversion channel
+    severity: medium
+    requires: { has_phone: true, has_online_booking: false, has_whatsapp: false }
+    patterns: ["tel:"]
+    requirements: [missed_call_recovery, lead_followup]
+
+  - signal_id: no_whatsapp_cta
+    impact: limited_messaging_channel
+    lenses: [automation]
+    title: No WhatsApp contact channel detected
+    severity: low
+    requires: { has_whatsapp: false }
+    patterns: ["wa.me", "api.whatsapp.com", "whatsapp us"]
+    requirements: [messaging_channel, customer_messaging]
+
+  - signal_id: no_live_chat
+    impact: no_realtime_visitor_capture
+    lenses: [automation]
+    title: No live chat / assistant detected
+    severity: low
+    requires: { has_live_chat: false }
+    patterns: [intercom, tidio, drift, crisp, "chat with us"]
+    requirements: [realtime_visitor_capture, lead_qualification]
+
+  - signal_id: manual_contact_form_only
+    impact: manual_enquiry_followup
+    lenses: [automation]
+    title: Lead capture relies on a manual contact form
+    severity: medium
+    requires: { has_contact_form: true, has_online_booking: false, has_live_chat: false }
+    patterns: ["<form"]
+    requirements: [enquiry_followup, lead_routing]

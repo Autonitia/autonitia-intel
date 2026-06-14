@@ -1,0 +1,19 @@
+# Sales lens — unclear offer, weak conversion path, missing proof.
+signals:
+  - signal_id: no_pricing
+    impact: reduced_qualification_clarity
+    lenses: [sales]
+    title: No pricing information detected
+    severity: medium
+    requires: { has_pricing: false }
+    patterns: ["/pricing", plans, packages]
+    requirements: [pricing_clarity, qualification]
+
+  - signal_id: no_case_studies
+    impact: limited_social_proof
+    lenses: [sales]
+    title: No case studies / social proof detected
+    severity: medium
+    requires: { has_case_studies: false }
+    patterns: ["case study", testimonial, reviews]
+    requirements: [social_proof, trust_building]

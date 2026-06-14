@@ -1,0 +1,23 @@
+# Real-estate industry pack. These signals only fire when the detected industry
+# normalises to `real_estate`, and they introduce the lead_management and
+# customer_reengagement lenses purely from data (no Python change).
+signals:
+  - signal_id: property_alert_capture_not_observed
+    impact: limited_long_term_lead_nurture
+    lenses: [marketing, customer_reengagement]
+    industries: [real_estate]
+    title: No property-alert / new-listing subscription observed
+    severity: medium
+    requires: { has_newsletter: false }
+    patterns: ["property alerts", "new listing alerts", "email alerts", "saved search"]
+    requirements: [lead_capture, lead_nurture, property_alerts]
+
+  - signal_id: viewing_flow_manual_followup_risk
+    impact: possible_manual_viewing_coordination
+    lenses: [automation, lead_management]
+    industries: [real_estate]
+    title: Viewing requests may require manual coordination
+    severity: medium
+    requires: { has_contact_form: true, has_online_booking: false }
+    patterns: ["book a viewing", "arrange a viewing", "request a viewing", "schedule tour"]
+    requirements: [appointment_followup, lead_routing, customer_messaging]
