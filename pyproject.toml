@@ -1,6 +1,6 @@
 [project]
 name = "autonitia-intel"
-version = "0.2.0"
+version = "0.2.1"
 description = "Turn any business website into a clean, structured company profile — a graph-based extraction engine."
 readme = "README.md"
 requires-python = ">=3.10"

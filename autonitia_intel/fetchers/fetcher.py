@@ -5,6 +5,8 @@ Returns raw HTML. Caching is keyed by URL with a 24h TTL.
 
 import hashlib
 import json
+import os
+import threading
 import time
 from pathlib import Path
 
@@ -15,6 +17,20 @@ from .robots import RobotsDisallowed, allowed
 
 TTL_SECONDS = 86400
 _RETRYABLE_STATUS = {429, 500, 502, 503, 504}
+
+# Container-safe Chromium flags. `--disable-dev-shm-usage` is the key one: in
+# Docker the default /dev/shm is tiny (64MB) and Chromium crashes/OOMs without it.
+_CHROMIUM_ARGS = [
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--disable-extensions",
+]
+
+# Cap concurrent browser renders so parallel requests can't exhaust memory on a
+# small instance. Tune with PLAYWRIGHT_MAX_CONCURRENCY (default 2).
+_MAX_BROWSERS = max(1, int(os.getenv("PLAYWRIGHT_MAX_CONCURRENCY", "2")))
+_browser_gate = threading.BoundedSemaphore(_MAX_BROWSERS)
 
 
 def _cache_path(url: str) -> Path:
@@ -74,20 +90,23 @@ def _via_cloudscraper(url: str) -> str:
 
 def _via_playwright(url: str) -> str:
     from playwright.sync_api import sync_playwright
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        ctx = browser.new_context(user_agent=BROWSER_HEADERS["User-Agent"], locale="en-US",
-                                  viewport={"width": 1920, "height": 1080})
-        page = ctx.new_page()
-        page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+    # Bound concurrency, then always tear the browser down — even on error — so a
+    # failed render can't leak a Chromium process and starve the instance.
+    with _browser_gate, sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=_CHROMIUM_ARGS)
         try:
-            page.wait_for_load_state("networkidle", timeout=12_000)
-        except Exception:
-            pass
-        page.wait_for_timeout(4000)
-        html = page.content()
-        browser.close()
-    return html
+            ctx = browser.new_context(user_agent=BROWSER_HEADERS["User-Agent"], locale="en-US",
+                                      viewport={"width": 1920, "height": 1080})
+            page = ctx.new_page()
+            page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+            try:
+                page.wait_for_load_state("networkidle", timeout=12_000)
+            except Exception:
+                pass
+            page.wait_for_timeout(4000)
+            return page.content()
+        finally:
+            browser.close()
 
 
 def _tier1_with_retry(url: str) -> str | None:

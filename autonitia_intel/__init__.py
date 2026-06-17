@@ -23,5 +23,5 @@ Bring your own model key:
 from .graph import ProfileGraph
 from .models import CompanyProfile, ProfileResult
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __all__ = ["ProfileGraph", "CompanyProfile", "ProfileResult"]
