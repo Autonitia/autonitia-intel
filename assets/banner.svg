@@ -1,0 +1,69 @@
+<svg width="1280" height="360" viewBox="0 0 1280 360" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1e"/>
+      <stop offset="1" stop-color="#0d1526"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.3" r="0.7">
+      <stop offset="0" stop-color="#00d4ff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#00d4ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00d4ff"/>
+      <stop offset="1" stop-color="#5b8cff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="360" fill="url(#bg)"/>
+  <rect width="1280" height="360" fill="url(#glow)"/>
+
+  <!-- faint grid -->
+  <g stroke="#ffffff" stroke-opacity="0.04">
+    <path d="M0 90 H1280 M0 180 H1280 M0 270 H1280"/>
+    <path d="M160 0 V360 M320 0 V360 M480 0 V360 M640 0 V360 M800 0 V360 M960 0 V360 M1120 0 V360"/>
+  </g>
+
+  <!-- graph motif (the pipeline) -->
+  <g>
+    <g stroke="url(#cyan)" stroke-width="2" stroke-opacity="0.55">
+      <line x1="980" y1="110" x2="1080" y2="80"/>
+      <line x1="980" y1="110" x2="1075" y2="180"/>
+      <line x1="1075" y1="180" x2="1080" y2="280"/>
+      <line x1="1075" y1="180" x2="1175" y2="150"/>
+      <line x1="1080" y1="80" x2="1175" y2="150"/>
+      <line x1="1080" y1="280" x2="1175" y2="150"/>
+    </g>
+    <g fill="#0a0f1e" stroke="url(#cyan)" stroke-width="2.5">
+      <circle cx="980" cy="110" r="13"/>
+      <circle cx="1080" cy="80" r="11"/>
+      <circle cx="1075" cy="180" r="15"/>
+      <circle cx="1080" cy="280" r="11"/>
+      <circle cx="1175" cy="150" r="13"/>
+    </g>
+    <g fill="#00d4ff">
+      <circle cx="980" cy="110" r="4"/>
+      <circle cx="1075" cy="180" r="4"/>
+      <circle cx="1175" cy="150" r="4"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <text x="80" y="150" font-size="62" font-weight="700" fill="#ffffff" letter-spacing="-1.5">autonitia<tspan fill="#00d4ff">-intel</tspan></text>
+
+  <!-- tagline -->
+  <text x="82" y="205" font-size="27" font-weight="500" fill="#cbd5e1">Turn any business website into structured lead intelligence.</text>
+  <text x="82" y="243" font-size="19" font-weight="400" fill="#8aa0b8">Company profile · capabilities · evidence-backed signals · scores — open source.</text>
+
+  <!-- install chip -->
+  <g>
+    <rect x="82" y="278" width="372" height="46" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10"/>
+    <text x="104" y="307" font-size="19" font-family="'SF Mono','JetBrains Mono',Menlo,Consolas,monospace" fill="#00d4ff">$</text>
+    <text x="124" y="307" font-size="19" font-family="'SF Mono','JetBrains Mono',Menlo,Consolas,monospace" fill="#e5edf5">pip install autonitia-intel</text>
+  </g>
+
+  <!-- MIT badge -->
+  <g>
+    <rect x="474" y="278" width="92" height="46" rx="10" fill="#00d4ff" fill-opacity="0.08" stroke="#00d4ff" stroke-opacity="0.30"/>
+    <text x="520" y="307" font-size="17" font-weight="600" fill="#00d4ff" text-anchor="middle">MIT</text>
+  </g>
+</svg>

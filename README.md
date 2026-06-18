@@ -1,8 +1,21 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Autonitia/autonitia-intel/main/assets/banner.png" alt="autonitia-intel" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://pypi.org/project/autonitia-intel/"><img src="https://img.shields.io/pypi/v/autonitia-intel?color=00d4ff&label=pypi" alt="PyPI version"></a>
+  <img src="https://img.shields.io/pypi/pyversions/autonitia-intel" alt="Python versions">
+  <img src="https://img.shields.io/badge/license-MIT-2ea043" alt="License: MIT">
+  <a href="https://autonitia.ai/intel"><img src="https://img.shields.io/badge/hosted%20api-autonitia.ai%2Fintel-00d4ff" alt="Hosted API"></a>
+</p>
+
 # autonitia-intel
 
 Turn any business website into a clean, structured company profile — and a quick read on where the opportunities are.
 
 Point it at a URL and get back the company's details (description, services, contact info, social presence) plus the tools and capabilities its site exposes. It also tells you how many opportunities a given **lens** (automation, marketing, sales…) would surface.
+
+> **Want the full intelligence?** The hosted **[Autonitia Intel API](https://autonitia.ai/intel)** turns these profiles into verified signals, fit/opportunity scores, live industry research, and account briefings. [See pricing →](https://autonitia.ai/pricing)
 
 ## Install
 
@@ -79,7 +92,9 @@ This open-source engine gives you the profile and the opportunity count. The hos
 | Pain signals with evidence | — | ✅ |
 | Scoring (fit / opportunity / confidence) | — | ✅ |
 | Offer matching + ranked opportunities | — | ✅ |
-| Outreach messages | — | ✅ |
+| Account briefings (12-question business brief) | — | ✅ |
+| Live industry & competitor research (cited) | — | ✅ |
+| Industry benchmarks | — | ✅ |
 | External enrichment (founders, HQ, funding) | — | ✅ |
 | REST API, async jobs, webhooks, CRM export | — | ✅ |
 
